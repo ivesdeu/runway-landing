@@ -1,5 +1,5 @@
 import React, { Children } from 'react'
-import { motion as Motion } from 'framer-motion'
+import { motion as Motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils.js'
 
 /**
@@ -123,19 +123,27 @@ const presetVariants = {
  * @param {string} [props.className]
  * @param {{ container?: import('framer-motion').Variants; item?: import('framer-motion').Variants }} [props.variants]
  * @param {PresetType} [props.preset]
+ * @param {import('framer-motion').ViewportOptions} [props.viewport]
  */
-export function AnimatedGroup({ children, className, variants, preset }) {
+export function AnimatedGroup({ children, className, variants, preset, viewport }) {
+  const reduceMotion = useReducedMotion()
   const selectedVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants }
   const containerVariants = variants?.container ?? selectedVariants.container
   const itemVariants = variants?.item ?? selectedVariants.item
 
+  const view = viewport ?? { once: true, margin: '0px 0px 100px 0px' }
+
+  if (reduceMotion) {
+    return <div className={cn(className)}>{children}</div>
+  }
+
   return (
     <Motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={view}
       variants={containerVariants}
       className={cn(className)}
     >

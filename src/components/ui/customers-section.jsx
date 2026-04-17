@@ -2,21 +2,20 @@ import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import { AnimatedGroup } from '@/components/ui/animated-group.jsx'
 
+const smoothEase = [0.22, 1, 0.36, 1]
+
 const transitionVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: 'blur(6px)',
-      y: 8,
+      y: 14,
     },
     visible: {
       opacity: 1,
-      filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5,
+        duration: 0.55,
+        ease: smoothEase,
       },
     },
   },
@@ -52,17 +51,18 @@ export function CustomersSection({
         <AnimatedGroup
           variants={{
             container: {
-              hidden: { opacity: 0 },
+              hidden: { opacity: 1 },
               visible: {
                 opacity: 1,
                 transition: {
-                  staggerChildren: 0.05,
-                  delayChildren: 0.15,
+                  staggerChildren: 0.07,
+                  delayChildren: 0.04,
                 },
               },
             },
             item: transitionVariants.item,
           }}
+          viewport={{ once: true, margin: '0px 0px 140px 0px' }}
           className="relative z-0 mx-auto mt-2 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-8 transition-opacity duration-500 group-hover:opacity-50 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-10 md:mt-4 lg:grid-cols-4"
         >
           {customers.map((logo) => (
@@ -75,7 +75,7 @@ export function CustomersSection({
                 src={logo.src}
                 alt={logo.alt}
                 height={logo.height}
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               />
             </div>

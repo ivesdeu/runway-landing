@@ -11,10 +11,7 @@ const groups = [
   },
   {
     title: 'Account',
-    links: [
-      { href: '#', label: 'Sign in' },
-      { to: '/contact', label: 'Request access' },
-    ],
+    links: [{ to: '/contact', label: 'Request access' }],
   },
   {
     title: 'Legal',
