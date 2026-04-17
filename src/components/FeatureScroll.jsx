@@ -269,14 +269,6 @@ export default function FeatureScroll() {
       className="scroll-mt-24 overflow-x-hidden border-t border-black/10 bg-white/25 px-6 backdrop-blur-[2px] md:px-12 lg:px-24"
     >
       <div className="mx-auto max-w-7xl pt-12 md:pt-16 lg:pt-20">
-        <p className="mb-5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-[#111] md:mb-6">
-          What&apos;s inside
-        </p>
-        <p className="max-w-3xl pb-8 text-sm leading-relaxed text-[#555] md:text-base">
-          GA4 dashboard, campaign tracking, lead management with UTMs, channel
-          performance reports, Salesforce-ready export, AI Advisor, multi-brand
-          workspaces, and white-label branding — one marketing operating system.
-        </p>
         {blocks.map((b, i) => (
           <ScrollBlock
             key={b.headline}
