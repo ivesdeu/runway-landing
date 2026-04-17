@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import {
+  motion as Motion,
+  useMotionTemplate,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion'
 import RunwayLogo from './RunwayLogo.jsx'
 
 const NAV_WORDMARK_SRC = `${import.meta.env.BASE_URL}runway-wordmark-nav.png`
@@ -50,6 +57,22 @@ function NavLinkGroup({ className, onNavigate }) {
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const reduceMotion = useReducedMotion()
+  const { scrollY } = useScroll()
+
+  const yScroll = [0, 100]
+  const navPyRem = useTransform(scrollY, yScroll, [1.25, reduceMotion ? 1.25 : 0.65])
+  const navPaddingY = useMotionTemplate`${navPyRem}rem`
+
+  const logoScale = useTransform(scrollY, yScroll, [1, reduceMotion ? 1 : 0.92])
+
+  const actionsScale = useTransform(scrollY, yScroll, [1, reduceMotion ? 1 : 0.96])
+
+  const rowMinHRem = useTransform(scrollY, yScroll, [3, reduceMotion ? 3 : 2.45])
+  const rowMinHeight = useMotionTemplate`${rowMinHRem}rem`
+
+  const headerShadowAlpha = useTransform(scrollY, yScroll, [0, reduceMotion ? 0 : 0.07])
+  const headerBoxShadow = useMotionTemplate`0 12px 32px rgba(0,0,0,${headerShadowAlpha})`
 
   useEffect(() => {
     if (!menuOpen) return
@@ -68,29 +91,50 @@ export default function Nav() {
   const closeMenu = () => setMenuOpen(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/75 backdrop-blur-md">
-      <nav className="relative mx-auto max-w-7xl px-6 py-5 md:px-12 md:py-5 lg:px-24 lg:py-6">
-        <div className="relative flex min-h-[2.75rem] items-center justify-between md:min-h-[3rem]">
-          <Link
-            to="/"
-            className="relative z-20 flex shrink-0 items-center text-[#111] outline-offset-4"
-            aria-label="Runway home"
-            onClick={closeMenu}
+    <header className="sticky top-0 z-50 isolate">
+      <Motion.div
+        className="border-b border-black/10 bg-white/75 backdrop-blur-md"
+        style={{ boxShadow: headerBoxShadow }}
+      >
+      <Motion.nav
+        className="relative mx-auto max-w-7xl px-6 md:px-12 lg:px-24"
+        style={{ paddingTop: navPaddingY, paddingBottom: navPaddingY }}
+      >
+        <Motion.div
+          className="relative flex items-center justify-between"
+          style={{ minHeight: rowMinHeight }}
+        >
+          <Motion.div
+            className="relative z-20 shrink-0"
+            style={{ scale: logoScale, transformOrigin: '0% 50%' }}
           >
-            <RunwayLogo
-              src={NAV_WORDMARK_SRC}
-              className="h-7 w-auto md:h-8"
-              alt=""
-            />
-          </Link>
+            <Link
+              to="/"
+              className="flex items-center text-[#111] outline-offset-4"
+              aria-label="Runway home"
+              onClick={closeMenu}
+            >
+              <RunwayLogo
+                src={NAV_WORDMARK_SRC}
+                className="h-7 w-auto md:h-8"
+                alt=""
+              />
+            </Link>
+          </Motion.div>
 
           <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 hidden md:flex md:items-center md:justify-center">
-            <div className="pointer-events-auto">
+            <Motion.div
+              className="pointer-events-auto"
+              style={{ scale: actionsScale, transformOrigin: '50% 50%' }}
+            >
               <NavLinkGroup />
-            </div>
+            </Motion.div>
           </div>
 
-          <div className="relative z-20 flex shrink-0 items-center gap-2">
+          <Motion.div
+            className="relative z-20 flex shrink-0 items-center gap-2"
+            style={{ scale: actionsScale, transformOrigin: '100% 50%' }}
+          >
             <Link
               to="/contact"
               className="hidden items-center gap-1.5 text-[0.9375rem] font-medium text-[#111] transition hover:opacity-70 md:inline-flex md:text-base"
@@ -114,9 +158,9 @@ export default function Nav() {
                 <Menu className="h-6 w-6" aria-hidden strokeWidth={1.75} />
               )}
             </button>
-          </div>
-        </div>
-      </nav>
+          </Motion.div>
+        </Motion.div>
+      </Motion.nav>
 
       {menuOpen ? (
         <div
@@ -148,6 +192,7 @@ export default function Nav() {
           </Link>
         </div>
       ) : null}
+      </Motion.div>
     </header>
   )
 }

@@ -21,39 +21,42 @@ export default function Shell() {
   }, [location.pathname, location.hash])
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[linear-gradient(160deg,#b8d4ea_0%,#cce0ed_35%,#e8dcc0_100%)] font-sans text-[#111] antialiased">
+    <div className="relative min-h-screen bg-[linear-gradient(160deg,#b8d4ea_0%,#cce0ed_35%,#e8dcc0_100%)] font-sans text-[#111] antialiased">
       <div className="page-grain" aria-hidden />
-      <div className="relative z-[2] flex min-h-screen flex-col">
+      <div className="relative z-[2] flex min-h-screen min-w-0 flex-col">
         <Nav />
-        <div className="flex-1">
-          <AnimatePresence mode="wait" initial={false}>
-            {outlet ? (
-              <Motion.div
-                key={location.pathname}
-                className="min-h-0"
-                initial={
-                  reduceMotion
-                    ? { opacity: 0 }
-                    : { opacity: 0, y: 12, filter: 'blur(6px)' }
-                }
-                animate={
-                  reduceMotion
-                    ? { opacity: 1 }
-                    : { opacity: 1, y: 0, filter: 'blur(0px)' }
-                }
-                exit={
-                  reduceMotion
-                    ? { opacity: 0 }
-                    : { opacity: 0, y: -10, filter: 'blur(4px)' }
-                }
-                transition={transition}
-              >
-                {outlet}
-              </Motion.div>
-            ) : null}
-          </AnimatePresence>
+        {/* overflow-x only below the header so position:sticky on Nav isn't clipped */}
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-clip">
+          <div className="min-h-0 flex-1">
+            <AnimatePresence mode="wait" initial={false}>
+              {outlet ? (
+                <Motion.div
+                  key={location.pathname}
+                  className="min-h-0"
+                  initial={
+                    reduceMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, y: 12, filter: 'blur(6px)' }
+                  }
+                  animate={
+                    reduceMotion
+                      ? { opacity: 1 }
+                      : { opacity: 1, y: 0, filter: 'blur(0px)' }
+                  }
+                  exit={
+                    reduceMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, y: -10, filter: 'blur(4px)' }
+                  }
+                  transition={transition}
+                >
+                  {outlet}
+                </Motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </div>
   )
