@@ -6,21 +6,20 @@ const groups = [
     title: 'Product',
     links: [
       { to: '/#features', label: 'Features' },
-      { to: '/#reviews', label: 'Reviews' },
+      { to: '/contact', label: 'Pricing' },
     ],
   },
   {
-    title: 'Company',
-    links: [{ to: '/contact', label: 'Contact' }],
-  },
-  {
-    title: 'Resources',
-    links: [{ href: '#', label: 'GitHub' }],
+    title: 'Account',
+    links: [
+      { href: '#', label: 'Sign in' },
+      { to: '/contact', label: 'Request access' },
+    ],
   },
   {
     title: 'Legal',
     links: [
-      { href: '#', label: 'Privacy' },
+      { href: '#', label: 'Privacy policy' },
       { href: '#', label: 'Terms' },
     ],
   },
@@ -59,14 +58,14 @@ export default function Footer() {
                 className="h-7 w-auto opacity-100 transition-opacity group-hover:opacity-80 md:h-8"
                 alt=""
               />
-              <span className="max-w-56 text-sm leading-relaxed text-[#555]">
-                Clients, money, time
+              <span className="max-w-xs text-sm leading-relaxed text-[#555]">
+                Your marketing data, finally in one place.
               </span>
             </Link>
           </div>
 
           <nav
-            className="grid max-w-full grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 sm:gap-x-10 lg:col-span-8 lg:max-w-max lg:justify-self-end lg:gap-x-14"
+            className="grid max-w-full grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-x-10 lg:col-span-8 lg:max-w-max lg:justify-self-end lg:gap-x-14"
             aria-label="Footer"
           >
             {groups.map((g) => (
@@ -93,13 +92,13 @@ export default function Footer() {
         <div className="mt-14 border-t border-black/10 pt-10">
           <ul className="grid gap-5 text-sm leading-snug text-[#555] sm:grid-cols-3 sm:gap-8">
             <li className="border-l-2 border-[#d4f542] pl-4">
-              USD/EUR today.
+              GA4 metrics refresh hourly — no manual exports.
             </li>
             <li className="border-l-2 border-[#d4f542] pl-4">
-              Journal export for your accountant.
+              Leads capture UTMs at first touch for full attribution.
             </li>
             <li className="border-l-2 border-[#d4f542] pl-4">
-              Bank-style CSV import with an undo safety net.
+              Salesforce-ready CSV export with history preserved.
             </li>
           </ul>
         </div>

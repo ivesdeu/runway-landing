@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from '../components/Hero.jsx'
+import { CustomersSection } from '../components/ui/customers-section.jsx'
+import { customerLogos } from '../data/customerLogos.js'
 import FeatureScroll from '../components/FeatureScroll.jsx'
 import FeatureTabs from '../components/FeatureTabs.jsx'
 import Testimonials from '../components/Testimonials.jsx'
@@ -22,6 +24,7 @@ export default function HomePage() {
   return (
     <main className="relative overflow-x-hidden">
       <Hero />
+      <CustomersSection customers={customerLogos} />
       <FeatureScroll />
       <FeatureTabs />
       <Testimonials />

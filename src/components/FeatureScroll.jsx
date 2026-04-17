@@ -1,11 +1,4 @@
-import {
-  Check,
-  LayoutDashboard,
-  PenLine,
-  SlidersHorizontal,
-  RefreshCw,
-  Plug,
-} from 'lucide-react'
+import { Check, LayoutDashboard, LineChart, FileDown } from 'lucide-react'
 import useInView from '../hooks/useInView.js'
 import useParallax from '../hooks/useParallax.js'
 
@@ -25,17 +18,17 @@ function DashboardKpiMockup() {
   return (
     <MockShell>
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm font-semibold text-[#111]">Dashboard</p>
+        <p className="text-sm font-semibold text-[#111]">GA4 dashboard</p>
         <span className="rounded-full border border-black/10 bg-white px-2 py-0.5 text-[10px] font-medium text-[#555]">
-          This period
+          Refreshed hourly
         </span>
       </div>
       <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {[
-          { k: 'Revenue', v: '$42.1k' },
-          { k: 'MRR view', v: '$9.8k' },
-          { k: 'Net profit', v: '$11.2k' },
-          { k: 'Outstanding AR', v: '$6.4k' },
+          { k: 'Sessions', v: '128k' },
+          { k: 'Users', v: '42.1k' },
+          { k: 'Conv. rate', v: '3.2%' },
+          { k: 'Cost / lead', v: '$48' },
         ].map((x) => (
           <div
             key={x.k}
@@ -51,7 +44,7 @@ function DashboardKpiMockup() {
       <div className="grid gap-3 lg:grid-cols-2">
         <div className="rounded-xl border border-black/10 bg-[#f5f7fa] p-3">
           <p className="text-[10px] font-semibold uppercase tracking-wide text-[#555]">
-            Revenue vs expenses
+            Channel performance
           </p>
           <div className="mt-2 flex h-20 items-end gap-1">
             {[30, 45, 40, 55, 50, 60, 48].map((h, i) => (
@@ -62,23 +55,26 @@ function DashboardKpiMockup() {
               />
             ))}
           </div>
+          <p className="mt-2 text-[10px] text-[#555]">
+            Organic · Paid · Email · Referral
+          </p>
         </div>
         <div className="rounded-xl border border-black/10 bg-white p-3">
           <p className="text-[10px] font-semibold uppercase tracking-wide text-[#555]">
-            Expense breakdown
+            Leads by channel
           </p>
           <ul className="mt-2 space-y-1.5 text-xs text-[#111]">
             <li className="flex justify-between">
-              <span>Payroll</span>
-              <span className="font-medium">41%</span>
+              <span>Paid search</span>
+              <span className="font-medium">412</span>
             </li>
             <li className="flex justify-between">
-              <span>Software</span>
-              <span className="font-medium">12%</span>
+              <span>Organic</span>
+              <span className="font-medium">268</span>
             </li>
             <li className="flex justify-between">
-              <span>Ops</span>
-              <span className="font-medium">19%</span>
+              <span>Email</span>
+              <span className="font-medium">94</span>
             </li>
           </ul>
         </div>
@@ -92,7 +88,7 @@ function AgencyDeliveryMockup() {
     <MockShell>
       <div className="mb-4 flex items-center justify-between gap-3">
         <p className="min-w-0 text-sm font-semibold text-[#111]">
-          Customers & delivery
+          Campaigns & leads
         </p>
         <img
           src={FEATURE_MOCK_WORDMARK_SRC}
@@ -102,62 +98,49 @@ function AgencyDeliveryMockup() {
           decoding="async"
         />
       </div>
-      <div className="mb-3 rounded-xl border border-black/10 bg-white p-3">
+      <div className="mb-3 overflow-hidden rounded-xl border border-black/10 bg-white p-3">
         <p className="text-[10px] font-semibold uppercase text-[#555]">
-          Customers
+          Active campaigns
         </p>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {['Northwind LLC', 'Harbor Studio', 'Brightline Co.'].map((n) => (
-            <span
-              key={n}
-              className="rounded-lg border border-black/10 bg-[#f5f7fa] px-2 py-1 text-[11px] text-[#111]"
+        <div className="mt-2 space-y-2 text-[11px] text-[#111]">
+          {[
+            { c: 'Q2 demand gen', ch: 'Paid', b: '$12k', leads: '186', st: 'Live' },
+            { c: 'Webinar series', ch: 'Email', b: '$3k', leads: '94', st: 'Live' },
+            { c: 'Brand search', ch: 'Organic', b: '—', leads: '268', st: 'Live' },
+          ].map((row) => (
+            <div
+              key={row.c}
+              className="flex flex-wrap items-center justify-between gap-2 border-b border-black/5 pb-2 last:border-0 last:pb-0"
             >
-              {n}
-            </span>
+              <span className="font-medium">{row.c}</span>
+              <span className="text-[#555]">{row.ch}</span>
+              <span className="text-[#555]">{row.b}</span>
+              <span>{row.leads} leads</span>
+              <span className="rounded bg-[#d4f542]/50 px-1.5 py-0.5 text-[10px] font-semibold">
+                {row.st}
+              </span>
+            </div>
           ))}
         </div>
       </div>
-      <div className="grid gap-2 sm:grid-cols-2">
-        <div className="rounded-xl border border-black/10 bg-[#f5f7fa] p-3">
-          <p className="text-[10px] font-semibold uppercase text-[#555]">
-            Projects
-          </p>
-          <ul className="mt-2 space-y-2 text-xs text-[#111]">
-            <li className="flex justify-between border-b border-black/5 pb-1">
-              <span>Website refresh</span>
-              <span className="text-[#555]">Active</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Retainer — Q2</span>
-              <span className="text-[#555]">Invoiced</span>
-            </li>
-          </ul>
-        </div>
-        <div className="rounded-xl border border-black/10 bg-white p-3">
-          <p className="text-[10px] font-semibold uppercase text-[#555]">
-            Timesheet
-          </p>
-          <ul className="mt-2 space-y-2 text-xs text-[#111]">
-            <li className="flex justify-between">
-              <span>Mon · Design</span>
-              <span className="font-medium">4.5h</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Tue · Client call</span>
-              <span className="font-medium">1.0h</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Wed · Build</span>
-              <span className="font-medium">6.0h</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="mt-3 rounded-xl border border-dashed border-black/15 bg-white/90 p-3">
-        <p className="text-[10px] text-[#555]">Invoices</p>
-        <p className="mt-1 text-xs text-[#111]">
-          INV-1042 · Line items · PDF/export as shipped
+      <div className="rounded-xl border border-black/10 bg-[#f5f7fa] p-3">
+        <p className="text-[10px] font-semibold uppercase text-[#555]">
+          Recent leads · UTM capture
         </p>
+        <ul className="mt-2 space-y-2 text-xs text-[#111]">
+          <li className="rounded-lg border border-black/10 bg-white px-2 py-1.5">
+            <span className="font-medium">jordan@acme.co</span>
+            <span className="mt-0.5 block text-[10px] text-[#555]">
+              utm_source=google · utm_medium=cpc · utm_campaign=q2-demand
+            </span>
+          </li>
+          <li className="rounded-lg border border-black/10 bg-white px-2 py-1.5">
+            <span className="font-medium">casey@northwind.io</span>
+            <span className="mt-0.5 block text-[10px] text-[#555]">
+              utm_source=newsletter · utm_medium=email · utm_campaign=webinar-3
+            </span>
+          </li>
+        </ul>
       </div>
     </MockShell>
   )
@@ -167,33 +150,34 @@ function WorkflowCrmMockup() {
   return (
     <MockShell>
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm font-semibold text-[#111]">
-          CRM events & automation
-        </p>
+        <p className="text-sm font-semibold text-[#111]">Export &amp; AI advisor</p>
         <span className="rounded-full border border-black/10 bg-white px-2 py-0.5 text-[10px] text-[#555]">
-          When DB provisioned
+          Salesforce-ready
         </span>
       </div>
       <div className="mb-3 rounded-xl border border-black/10 bg-white p-3">
         <p className="text-[10px] font-semibold uppercase text-[#555]">
-          CRM event
+          Lead export
         </p>
         <p className="mt-1 text-xs text-[#111]">
-          Logged: proposal sent — tied to customer record (when signed in).
+          CSV mapped to Salesforce native lead import · mark as exported · history
+          retained.
+        </p>
+        <p className="mt-2 rounded-md border border-dashed border-black/20 bg-[#f5f7fa] py-2 text-center text-[10px] font-medium text-[#111]">
+          Download leads_export.csv
         </p>
       </div>
       <div className="space-y-2 rounded-xl border border-black/10 bg-[#f5f7fa] p-3">
         <p className="text-[10px] font-semibold uppercase text-[#555]">
-          Workflow rule
+          AI advisor
         </p>
         <div className="rounded-lg border border-black/10 bg-white p-2.5 text-xs text-[#111]">
-          On invoice paid → create task + queue notification (stub path may apply
-          until integrations are complete).
+          Conversion rate dipped 0.4% vs last week on paid search — suggest
+          reviewing the Q2 demand gen ad set and landing page alignment.
         </div>
         <p className="text-[10px] leading-relaxed text-[#555]">
-          Uses workflow_rules, workflow_runs, workflow_outbox, and crm_events
-          after you run the workflow SQL (or equivalent setup). Not a separate
-          Zapier product.
+          Reads GA4 trends and campaign data to flag anomalies and suggest next
+          actions — you stay in control.
         </p>
       </div>
     </MockShell>
@@ -202,26 +186,26 @@ function WorkflowCrmMockup() {
 
 const blocks = [
   {
-    headline: 'Run the business from one dashboard',
+    headline: 'GA4 dashboard without the Friday spreadsheet ritual',
     bullets: [
-      'Track revenue, a recurring-style view where shown, net profit, expenses, and outstanding AR.',
-      'Charts for revenue vs expenses and expense breakdown on the current period.',
+      'Sessions, users, conversion rate, and cost per lead — refreshed hourly, no manual exports.',
+      'Channel performance reports: sessions, CVR, and leads for organic, paid, email, and referral so you know what is working.',
     ],
     Mock: DashboardKpiMockup,
   },
   {
-    headline: 'Agency and consultant delivery, tied to money',
+    headline: 'Campaign tracking and lead management with full attribution',
     bullets: [
-      'Customers for client records; Projects for delivery; Timesheet for hours against work.',
-      'Invoices with line items and PDF/export; collect online when Stripe Checkout is connected and you are signed in.',
+      'Manage every active campaign with budget, channel, lead count, and status in one table.',
+      'Every lead tagged with UTM source, medium, and campaign at capture — attribution from first click through export.',
     ],
     Mock: AgencyDeliveryMockup,
   },
   {
-    headline: 'Light finance plus CRM context, when you wire the backend',
+    headline: 'Salesforce-ready export and an AI copilot on your marketing data',
     bullets: [
-      'Keep CRM events and workflow notes alongside money when workflow tables are enabled.',
-      'Rules that create tasks, log CRM events, or queue notifications—automation you define; some outbound actions may be stubs until you finish integrations.',
+      'One-click CSV export mapped to Salesforce’s native lead import template — mark leads exported and keep your history intact.',
+      'AI Advisor reads GA4 trends and campaign data to surface anomalies, flag drops in conversion rate, and suggest next actions.',
     ],
     Mock: WorkflowCrmMockup,
   },
@@ -229,14 +213,16 @@ const blocks = [
 
 function ScrollBlock({ headline, bullets, Mock, reverse }) {
   const [ref, inView] = useInView()
-  // No yRange / scrollPull: translateY shifts the painted mock vs. layout box, so copy
-  // looked misaligned next to text and alternated oddly per row. Keep subtle x/rotate only.
+  // No yRange / scrollPull: translateY shifts the painted mock vs. layout box vs. copy.
+  // Stronger x / rotate / orbit / scale for depth without vertical drift.
   const mockRef = useParallax({
     yRange: 0,
-    xRange: reverse ? 5 : -5,
-    rotate: reverse ? 0.28 : -0.28,
-    scale: 0.015,
+    xRange: reverse ? 26 : -26,
+    rotate: reverse ? 1.35 : -1.35,
+    scale: 0.048,
     scrollPull: 0,
+    orbit: reverse ? -22 : 22,
+    rotatePull: reverse ? 0.028 : -0.028,
   })
 
   return (
@@ -287,9 +273,9 @@ export default function FeatureScroll() {
           What&apos;s inside
         </p>
         <p className="max-w-3xl pb-8 text-sm leading-relaxed text-[#555] md:text-base">
-          Dashboard, Customers, Income &amp; expenses, Transactions, Invoices,
-          Projects, Timesheet, Performance, Retention, Insights, Marketing,
-          Advisor, and Settings—each view slices the same underlying data.
+          GA4 dashboard, campaign tracking, lead management with UTMs, channel
+          performance reports, Salesforce-ready export, AI Advisor, multi-brand
+          workspaces, and white-label branding — one marketing operating system.
         </p>
         {blocks.map((b, i) => (
           <ScrollBlock
@@ -303,52 +289,36 @@ export default function FeatureScroll() {
             How it works
           </p>
           <h3 className="mt-2 max-w-xl font-sans text-2xl font-semibold tracking-tight text-[#111] md:text-3xl lg:text-4xl">
-            From demo to a wired-up stack
+            Connect GA4. Track leads. Export when you scale.
           </h3>
           <p className="mt-3 max-w-2xl text-sm text-[#555] md:text-base">
-            Optional pieces stay off until you configure them—Stripe, Advisor,
-            and cloud sync work when your backend is ready.
+            Three steps from raw analytics to Salesforce-ready leads — without
+            losing history along the way.
           </p>
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
               {
                 n: 1,
-                title: 'Open Runway',
-                line: 'Demo first, or sign in when you want sync.',
+                title: 'Connect GA4',
+                line: 'Runway pulls sessions, conversions, and channel data from your property automatically.',
                 Icon: LayoutDashboard,
               },
               {
                 n: 2,
-                title: 'Log what matters',
-                line: 'Customers, money, and time in one place.',
-                Icon: PenLine,
+                title: 'Track leads & campaigns',
+                line: 'Tag every lead with UTM data and manage campaigns by channel and budget in one place.',
+                Icon: LineChart,
               },
               {
                 n: 3,
-                title: 'Tune Settings',
-                line: 'Currency, tax, terms, budgets, logos, profile.',
-                Icon: SlidersHorizontal,
-              },
-              {
-                n: 4,
-                title: 'Sync across browsers',
-                line: 'Same email—use Sync after you sign in.',
-                Icon: RefreshCw,
-              },
-              {
-                n: 5,
-                title: 'Add power when ready',
-                line: 'Stripe, Advisor, CSV in/out—after Supabase + edges.',
-                Icon: Plug,
+                title: 'Export to Salesforce',
+                line: 'One click generates a Salesforce-ready CSV — your data stays yours.',
+                Icon: FileDown,
               },
             ].map(({ n, title, line, Icon }) => (
               <div
                 key={n}
-                className={`group flex h-full flex-col rounded-2xl border-2 border-[#111] bg-white/90 p-5 shadow-[0_8px_28px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.1)] ${
-                  n === 5
-                    ? 'sm:col-span-2 sm:max-w-xl sm:justify-self-center lg:col-span-1 lg:max-w-none lg:justify-self-stretch'
-                    : ''
-                }`}
+                className="group flex h-full flex-col rounded-2xl border-2 border-[#111] bg-white/90 p-5 shadow-[0_8px_28px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.1)]"
               >
                 <div className="flex items-start justify-between gap-3">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#d4f542] font-mono text-xs font-bold text-[#111]">

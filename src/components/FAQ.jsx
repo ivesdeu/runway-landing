@@ -4,24 +4,24 @@ import useInView from '../hooks/useInView.js'
 
 const faqs = [
   {
-    q: 'Do I need to sign in to try Runway?',
-    a: 'No. You can explore the UI in demo mode, then sign in when you want cloud sync across browsers. Stripe Checkout, server-backed CRM events, workflow runs, and Advisor need your Supabase project and deployed edge paths configured.',
+    q: 'How does Runway connect to GA4?',
+    a: 'You connect your GA4 property during onboarding. Runway pulls sessions, conversions, and channel data on an hourly refresh cadence so dashboards stay current without manual exports.',
   },
   {
-    q: 'How does cloud sync work?',
-    a: 'When signed in with the same email, use Sync to pull the same account on another browser. Until then, you are in local exploration and demo-first territory—the UI is built to stay usable when optional backend pieces are off.',
+    q: 'How are leads attributed to campaigns?',
+    a: 'Every lead is tagged with UTM source, medium, and campaign at capture. Attribution follows from first click through nurture so you can tie pipeline back to the initiative that sourced it.',
   },
   {
-    q: 'Does Runway connect to my bank automatically?',
-    a: 'No live two-way bank sync is claimed here. The app supports CSV import into the transaction log, with an undo for the last import. Journal CSV export is there for your accountant.',
+    q: 'What does the Salesforce export include?',
+    a: 'One click generates a CSV mapped to Salesforce’s native lead import template. You can mark leads as exported and retain full history in Runway so nothing disappears when a client graduates to CRM.',
   },
   {
-    q: 'What is workflow automation in Runway?',
-    a: 'After you provision workflow tables (workflow_rules, workflow_runs, workflow_outbox) and related setup, you can define automation you control—rules that create tasks, log CRM events, or queue notifications. Some outbound actions may be stubs until you complete integrations; this is not “Zapier included.”',
+    q: 'What does AI Advisor do?',
+    a: 'AI Advisor reads your GA4 trends and connected campaign data to surface anomalies, flag drops in conversion rate, and suggest next actions. It is a copilot — you review and decide what to change.',
   },
   {
-    q: 'What does Advisor do?',
-    a: 'When Advisor is configured (Supabase plus edge AI), you get task-style help such as daily briefs, follow-up drafts, variance and month-over-month explanations, weekly recap, and general Q&A. CRM flows merge drafts into a shape you confirm—they do not silently rewrite your CRM everywhere. Optional tables like ai_usage_events, ai_feedback, and ai_action_outcomes support logging when they exist.',
+    q: 'Can I manage multiple clients or brands?',
+    a: 'Yes. Multi-workspace support keeps each client or brand isolated with its own team, settings, and data. White-label options let you apply custom logos and accent colors per workspace.',
   },
 ]
 
@@ -40,13 +40,12 @@ export default function FAQ() {
       <div className="pointer-events-none absolute -right-[12%] top-1/4 z-0 h-[min(360px,60vw)] w-[min(360px,60vw)] rounded-full bg-white/40 blur-[90px]" />
       <div className="relative z-10 mx-auto max-w-3xl">
         <h2 className="text-center font-sans text-3xl font-semibold tracking-tight text-[#111] md:text-4xl lg:text-5xl">
-          Straight answers
+          Questions, answered plainly
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-[#555] md:text-base">
-          Runway is not a black-box magic platform. Cloud sync, Stripe, AI
-          Advisor, and workflow automation depend on your Supabase configuration
-          and deployed functions. The product stays calm when those pieces are
-          off—explore first, turn on production features when you wire them up.
+          Runway is built for marketers who want GA4, campaigns, and leads in one
+          place — with a clean path to Salesforce when you are ready. No black-box
+          magic; connect data, track leads, export on your terms.
         </p>
         <div className="mt-12 space-y-3">
           {faqs.map((item, i) => {

@@ -23,7 +23,7 @@ function FooterHeroMockup() {
                 alt="Runway"
                 className="block h-4 w-auto max-w-28 object-contain object-left md:h-5"
               />
-              <p className="mt-1.5 text-sm font-semibold text-[#111]">This month</p>
+              <p className="mt-1.5 text-sm font-semibold text-[#111]">This week</p>
             </div>
             <div className="flex gap-1">
               <span className="h-2 w-2 rounded-full bg-black/15" />
@@ -33,23 +33,23 @@ function FooterHeroMockup() {
           </div>
           <div className="mt-4 grid grid-cols-2 gap-3">
             <div className="rounded-xl border border-black/10 bg-white p-3">
-              <p className="text-[10px] text-[#555]">Revenue</p>
-              <p className="text-2xl font-bold text-[#111]">$38k</p>
+              <p className="text-[10px] text-[#555]">Sessions (7d)</p>
+              <p className="text-2xl font-bold text-[#111]">31.2k</p>
             </div>
             <div className="rounded-xl border border-black/10 bg-[#f5f7fa] p-3">
-              <p className="text-[10px] text-[#555]">Outstanding AR</p>
-              <p className="text-2xl font-bold text-[#111]">$9.2k</p>
+              <p className="text-[10px] text-[#555]">New leads</p>
+              <p className="text-2xl font-bold text-[#111]">428</p>
             </div>
           </div>
           <div className="mt-4 space-y-2 rounded-xl border border-black/10 bg-white p-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-[#111]">Invoices · draft</span>
+              <span className="text-xs text-[#111]">Salesforce export</span>
               <span className="rounded-md border border-black/10 bg-[#d4f542] px-2 py-0.5 text-[10px] font-semibold text-[#111]">
-                PDF ready
+                Ready
               </span>
             </div>
             <p className="text-[10px] text-[#555]">
-              Stripe Checkout when connected · same email sync when signed in
+              GA4 hourly sync · UTM on every lead · CSV mapped to Lead import
             </p>
           </div>
         </div>
@@ -72,25 +72,20 @@ export default function CTASection() {
       <div className="relative mx-auto max-w-4xl text-center">
         <div className="relative z-20">
           <h2 className="font-sans text-4xl font-semibold tracking-tight text-[#111] md:text-5xl lg:text-6xl">
-            Explore the UI, then connect your backend.
+            Stop switching tabs. Start seeing the full picture.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-[#555]">
-            View demo for the feature walkthrough, or sign up to talk with us.
-            Optional Stripe and Advisor stay off until your backend is ready.
+            Get early access to Runway — GA4 insights, lead tracking, and
+            Salesforce-ready export in one marketing dashboard. Tell us how your
+            team works today and we will follow up with next steps.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="#features"
-              className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-[#111] px-8 py-3.5 text-sm font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition hover:bg-[#222]"
-            >
-              View demo
-              <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-            </a>
+          <div className="mt-10 flex justify-center">
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-transparent px-8 py-3.5 text-sm font-medium text-[#111] transition hover:bg-black/[0.04]"
+              className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-[#111] px-8 py-3.5 text-sm font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition hover:bg-[#222]"
             >
-              Sign up
+              Get early access
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
             </Link>
           </div>
         </div>

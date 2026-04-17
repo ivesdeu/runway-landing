@@ -28,64 +28,52 @@ function HeroProductMock() {
         <div>
           <RunwayLogo className="h-4 w-auto md:h-5" alt="Runway" />
           <p className="mt-2 max-w-xl font-sans text-2xl font-semibold leading-tight tracking-tight text-[#111] md:text-3xl lg:text-4xl">
-            Run the business from one dashboard.
+            GA4 insights. Lead tracking. Salesforce-ready. All in one dashboard.
           </p>
         </div>
-        <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-          <a
-            href="#features"
-            className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-[#111] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#222]"
-          >
-            View demo
-          </a>
+        <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:justify-end">
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-transparent px-6 py-2.5 text-sm font-medium text-[#111] transition hover:bg-black/[0.04]"
+            className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-[#111] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#222]"
           >
-            Sign up
+            Get early access
           </Link>
         </div>
       </div>
       <div className="rounded-2xl border border-black/10 bg-[#f5f7fa] p-5 shadow-inner md:p-6">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4 border-b border-black/10 pb-4">
           <div>
-            <p className="text-xs text-[#555]">This month</p>
-            <p className="mt-1 text-lg font-semibold text-[#111]">Dashboard</p>
+            <p className="text-xs text-[#555]">GA4 · refreshed hourly</p>
+            <p className="mt-1 text-lg font-semibold text-[#111]">Marketing dashboard</p>
           </div>
           <span className="rounded-full border border-black/10 bg-white px-3 py-1 text-[10px] font-medium uppercase tracking-wide text-[#555]">
-            Signed in
+            Live property
           </span>
         </div>
-        <div className="mb-6 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-xl border border-black/10 bg-white p-4">
-            <p className="text-[10px] uppercase tracking-wide text-[#555]">
-              Revenue
-            </p>
-            <p className="mt-1 text-2xl font-bold tracking-tight text-[#111]">
-              $84.2k
-            </p>
-          </div>
-          <div className="rounded-xl border border-black/10 bg-white p-4">
-            <p className="text-[10px] uppercase tracking-wide text-[#555]">
-              Net profit
-            </p>
-            <p className="mt-1 text-2xl font-bold tracking-tight text-[#111]">
-              $19.4k
-            </p>
-          </div>
-          <div className="rounded-xl border border-black/10 bg-[#d4f542] p-4">
-            <p className="text-[10px] font-medium uppercase tracking-wide text-[#111]/80">
-              Outstanding AR
-            </p>
-            <p className="mt-1 text-2xl font-bold tracking-tight text-[#111]">
-              $12.1k
-            </p>
-          </div>
+        <div className="mb-6 grid gap-3 sm:grid-cols-4">
+          {[
+            { k: 'Sessions', v: '128k' },
+            { k: 'Users', v: '42.1k' },
+            { k: 'Conv. rate', v: '3.2%' },
+            { k: 'Cost / lead', v: '$48' },
+          ].map((x) => (
+            <div
+              key={x.k}
+              className="rounded-xl border border-black/10 bg-white p-4"
+            >
+              <p className="text-[10px] uppercase tracking-wide text-[#555]">
+                {x.k}
+              </p>
+              <p className="mt-1 text-xl font-bold tracking-tight text-[#111] md:text-2xl">
+                {x.v}
+              </p>
+            </div>
+          ))}
         </div>
         <div className="grid gap-3 lg:grid-cols-[1fr_minmax(0,200px)]">
           <div className="space-y-2">
             <p className="text-[10px] font-semibold uppercase tracking-wide text-[#555]">
-              Revenue vs expenses
+              Sessions by channel
             </p>
             <div className="flex h-24 items-end gap-1 rounded-xl border border-black/10 bg-white p-3">
               {[35, 52, 48, 70, 55, 62, 58].map((h, i) => (
@@ -99,20 +87,20 @@ function HeroProductMock() {
           </div>
           <div className="rounded-xl border border-dashed border-black/15 bg-white/80 p-4">
             <p className="text-[10px] font-semibold uppercase tracking-wide text-[#555]">
-              Expense breakdown
+              Top campaigns
             </p>
             <ul className="mt-3 space-y-2 text-xs text-[#111]">
               <li className="flex justify-between border-b border-black/5 pb-1">
-                <span>Payroll</span>
-                <span className="font-medium">38%</span>
+                <span>Search · Brand</span>
+                <span className="font-medium">412 leads</span>
               </li>
               <li className="flex justify-between border-b border-black/5 pb-1">
-                <span>Software</span>
-                <span className="font-medium">14%</span>
+                <span>LinkedIn</span>
+                <span className="font-medium">186 leads</span>
               </li>
               <li className="flex justify-between">
-                <span>Ops</span>
-                <span className="font-medium">22%</span>
+                <span>Email nurture</span>
+                <span className="font-medium">94 leads</span>
               </li>
             </ul>
           </div>
@@ -125,35 +113,51 @@ function HeroProductMock() {
 export default function Hero() {
   const [ref, inView] = useInView()
   const washRef = useParallax({
-    yRange: 28,
-    scrollPull: 0.06,
-    xRange: -6,
+    yRange: 32,
+    scrollPull: 0.075,
+    xRange: -10,
+    orbit: 8,
   })
   const washBRef = useParallax({
-    yRange: -22,
-    scrollPull: 0.08,
-    xRange: 8,
+    yRange: -30,
+    scrollPull: 0.085,
+    xRange: 12,
+    orbit: 7,
   })
   const mockShellRef = useParallax({
-    yRange: 24,
-    scrollPull: 0.04,
-    rotate: 0.35,
-    scale: -0.015,
+    yRange: 30,
+    scrollPull: 0.048,
+    rotate: 0.58,
+    scale: -0.026,
+    rotatePull: 0.022,
   })
   const mockInnerRef = useParallax({
-    yRange: -14,
-    rotate: -0.25,
-    scale: 0.012,
-    scrollPull: 0.025,
+    yRange: -22,
+    rotate: -0.48,
+    scale: 0.024,
+    scrollPull: 0.042,
+    rotatePull: -0.02,
   })
 
   return (
     <section
       ref={ref}
-      className={`relative overflow-x-hidden px-6 pb-20 pt-14 transition-opacity duration-700 md:px-12 md:pb-28 md:pt-20 lg:px-24 ${
+      className={`relative overflow-x-clip px-6 pb-10 pt-14 transition-opacity duration-700 md:px-12 md:pb-14 md:pt-20 lg:px-24 lg:pb-16 ${
         inView ? 'opacity-100' : 'opacity-0'
       }`}
     >
+      <div
+        className="hero-glow-mesh pointer-events-none absolute z-1"
+        aria-hidden
+      />
+      <div
+        className="hero-glow-orb hero-glow-orb--a z-1"
+        aria-hidden
+      />
+      <div
+        className="hero-glow-orb hero-glow-orb--b z-1"
+        aria-hidden
+      />
       <div className="pointer-events-none absolute left-[8%] top-[12%] z-0 opacity-50">
         <div
           ref={washRef}
@@ -170,28 +174,24 @@ export default function Hero() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-8 inline-flex rounded-full bg-[#d4f542] px-4 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-[#111]">
-            Explore before signup
+          <div className="hero-eyebrow-soft mb-8 inline-flex rounded-full bg-[#d4f542] px-4 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-[#111]">
+            Your marketing data, finally in one place.
           </div>
           <h1 className="font-sans text-[2.75rem] font-semibold leading-[1.05] tracking-tight text-[#111] md:text-6xl lg:text-7xl xl:text-[4.5rem]">
-            Know your pipeline, own your runway.
+            See every campaign, lead, and channel in one marketing dashboard.
           </h1>
           <div>
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-[#555] md:text-xl">
-              Your money, clients, and calendar all in one place
+              Runway pulls your GA4 data, tracks leads from first touch to export,
+              and gets you Salesforce-ready the moment you outgrow it. Built for
+              marketers who need answers, not spreadsheets.
             </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a
-                href="#features"
-                className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-[#111] px-8 py-3.5 text-sm font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition hover:bg-[#222]"
-              >
-                View demo
-              </a>
+            <div className="mt-10 flex justify-center">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-transparent px-8 py-3.5 text-sm font-medium text-[#111] transition hover:bg-black/[0.04]"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#111] bg-[#111] px-8 py-3.5 text-sm font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition hover:bg-[#222]"
               >
-                Sign up
+                Get early access
               </Link>
             </div>
           </div>
@@ -199,12 +199,14 @@ export default function Hero() {
         <div
           ref={mockShellRef}
           data-parallax
-          className="relative z-10 mx-auto mt-16 max-w-5xl transform-gpu"
+          className="relative z-10 mx-auto mt-10 max-w-5xl transform-gpu md:mt-12"
         >
           <div ref={mockInnerRef} data-parallax className="transform-gpu">
-            <BrowserChrome>
-              <HeroProductMock />
-            </BrowserChrome>
+            <div className="hero-mock-sway transform-gpu">
+              <BrowserChrome>
+                <HeroProductMock />
+              </BrowserChrome>
+            </div>
           </div>
         </div>
       </div>

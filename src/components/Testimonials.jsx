@@ -3,67 +3,67 @@ import useInView from '../hooks/useInView.js'
 
 const testimonials = [
   {
-    text: 'One dashboard for profit, AR, and burn by category. I stopped exporting three spreadsheets every Monday.',
+    text: 'I used to spend two hours every Friday pulling GA4 data into a spreadsheet. Runway cut that to zero.',
     image:
       'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'Priya N.',
-    role: 'Founder-operator',
+    name: 'Marketing Manager',
+    role: 'Placeholder quote',
   },
   {
-    text: 'Customers plus projects plus timesheet finally live next to invoices. My small agency actually uses it.',
+    text: 'The Salesforce export alone saved us the migration headache when our biggest client scaled up.',
     image:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'Elena V.',
-    role: 'Consulting lead',
+    name: 'Agency Owner',
+    role: 'Placeholder quote',
   },
   {
-    text: 'CSV import with undo saved me once. Journal export goes straight to our accountant—USD today, EUR when we need it.',
+    text: 'UTM capture at lead creation finally matches what we report in channel reviews — one source of truth.',
     image:
       'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'Marcus R.',
-    role: 'Studio owner',
+    name: 'Growth lead',
+    role: 'B2B SaaS',
   },
   {
-    text: 'Retention and Performance pages read like ops views, not generic AI fluff. Same numbers as the dashboard, different slice.',
+    text: 'We spin up a workspace per retainer client. GA4 + campaigns in one login keeps the team sane.',
     image:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: "Jamie O.",
-    role: 'Ops, small team',
+    name: 'Ops director',
+    role: 'Small agency',
   },
   {
-    text: 'Advisor drafts a follow-up; I edit and send. That “you confirm” flow is what I wanted—not silent writes.',
+    text: 'AI Advisor caught a CVR dip on paid search before our weekly standup — swapped a few headlines and recovered.',
     image:
       'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'Sofia M.',
-    role: 'Account manager',
+    name: 'Demand gen',
+    role: 'In-house',
   },
   {
-    text: 'Stripe Checkout only after we connected Supabase and deployed the edge path. Copy matched reality, which built trust.',
+    text: 'Hourly GA4 refresh means Monday metrics are already there. No more “export and pray” routines.',
     image:
       'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'David C.',
-    role: 'Finance + delivery',
+    name: 'Freelance marketer',
+    role: 'Multi-client',
   },
   {
-    text: 'Budgets per category on Expenses with progress bars—simple, and it matches how I think about burn.',
+    text: 'White-label lets us ship dashboards that look like the client’s brand without rebuilding from scratch.',
     image:
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'Rachel K.',
-    role: 'Founder',
+    name: 'Account lead',
+    role: 'Agency',
   },
   {
-    text: 'Workflow rules that log CRM events next to money—once the SQL was in, it finally felt like one system.',
+    text: 'Channel report broke out email vs paid so we could defend budget with numbers, not vibes.',
     image:
       'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'Tom A.',
-    role: 'Light CRM + finance',
+    name: 'Marketing manager',
+    role: 'Mid-market',
   },
   {
-    text: 'Demo first, sign in later. Sync across browsers with the same email is exactly how we onboarded the cofounder.',
+    text: 'Salesforce-ready CSV meant RevOps stopped asking “which column maps to Lead Source?”',
     image:
       'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=160&h=160&fit=crop&crop=faces&q=80',
-    name: 'Amelia B.',
-    role: 'Agency partner',
+    name: 'RevOps',
+    role: 'Series A',
   },
 ]
 
@@ -92,15 +92,15 @@ export default function Testimonials() {
         >
           <div className="flex justify-center">
             <div className="rounded-lg border border-black/10 bg-white/80 px-4 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-[#111]">
-              Operators
+              Social proof
             </div>
           </div>
           <h2 className="mt-5 text-center font-sans text-xl font-bold tracking-tight text-[#111] sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
-            What teams say about Runway
+            What marketers say about Runway
           </h2>
           <p className="mt-5 text-center text-[#555]">
-            Quotes from founders, agencies, and small ops leads using Runway for
-            clients, money, and time—no logo wall, no enterprise theater.
+            Placeholder quotes you can swap for real customers — focused on GA4,
+            leads, campaigns, and Salesforce-ready workflows.
           </p>
         </div>
 

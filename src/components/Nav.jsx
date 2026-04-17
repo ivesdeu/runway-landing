@@ -1,56 +1,153 @@
-import { ArrowRight } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { ArrowRight, Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import RunwayLogo from './RunwayLogo.jsx'
 
 const NAV_WORDMARK_SRC = `${import.meta.env.BASE_URL}runway-wordmark-nav.png`
 
-function SectionLink({ href, children }) {
+const NAV_LINKS = [
+  { href: '#features', label: 'Features' },
+  { href: '#reviews', label: 'Reviews' },
+  { href: '#faq', label: 'FAQ' },
+]
+
+function SectionLink({ href, children, onNavigate, className = '' }) {
   const { pathname } = useLocation()
+  const close = () => {
+    onNavigate?.()
+  }
+  const cls = `transition-colors hover:text-[#111] ${className}`.trim()
   if (pathname === '/' && href.startsWith('#')) {
     return (
-      <a href={href} className="transition-colors hover:text-[#111]">
+      <a href={href} className={cls} onClick={close}>
         {children}
       </a>
     )
   }
   const to = href.startsWith('#') ? `/${href}` : href
   return (
-    <Link to={to} className="transition-colors hover:text-[#111]">
+    <Link to={to} className={cls} onClick={close}>
       {children}
     </Link>
   )
 }
 
+function NavLinkGroup({ className, onNavigate }) {
+  return (
+    <ul
+      className={`m-0 flex list-none flex-wrap items-center justify-center gap-x-8 gap-y-2 p-0 text-[0.9375rem] font-normal leading-snug text-[#555] md:gap-x-10 md:text-base ${className ?? ''}`}
+    >
+      {NAV_LINKS.map(({ href, label }) => (
+        <li key={href}>
+          <SectionLink href={href} onNavigate={onNavigate}>
+            {label}
+          </SectionLink>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export default function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [menuOpen])
+
+  const closeMenu = () => setMenuOpen(false)
+
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-white/75 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 md:flex-row md:items-center md:justify-between md:px-12 lg:px-24">
-        <Link
-          to="/"
-          className="text-[#111] outline-offset-4"
-          aria-label="Runway home"
-        >
-          <RunwayLogo
-            src={NAV_WORDMARK_SRC}
-            className="h-5 w-auto md:h-6"
-            alt=""
-          />
-        </Link>
-        <div className="flex flex-wrap items-center justify-between gap-6 md:justify-end md:gap-10">
-          <div className="flex flex-wrap items-center gap-8 text-sm font-normal text-[#555]">
-            <SectionLink href="#features">Features</SectionLink>
-            <SectionLink href="#reviews">Reviews</SectionLink>
-            <SectionLink href="#faq">FAQ</SectionLink>
+      <nav className="relative mx-auto max-w-7xl px-6 py-5 md:px-12 md:py-5 lg:px-24 lg:py-6">
+        <div className="relative flex min-h-[2.75rem] items-center justify-between md:min-h-[3rem]">
+          <Link
+            to="/"
+            className="relative z-20 flex shrink-0 items-center text-[#111] outline-offset-4"
+            aria-label="Runway home"
+            onClick={closeMenu}
+          >
+            <RunwayLogo
+              src={NAV_WORDMARK_SRC}
+              className="h-7 w-auto md:h-8"
+              alt=""
+            />
+          </Link>
+
+          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 hidden md:flex md:items-center md:justify-center">
+            <div className="pointer-events-auto">
+              <NavLinkGroup />
+            </div>
           </div>
+
+          <div className="relative z-20 flex shrink-0 items-center gap-2">
+            <Link
+              to="/contact"
+              className="hidden items-center gap-1.5 text-[0.9375rem] font-medium text-[#111] transition hover:opacity-70 md:inline-flex md:text-base"
+            >
+              Request access
+              <ArrowRight className="h-[1.05rem] w-[1.05rem] md:h-5 md:w-5" aria-hidden />
+            </Link>
+
+            <button
+              type="button"
+              className="inline-flex rounded-lg p-2 text-[#111] transition hover:bg-black/[0.06] md:hidden"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav-menu"
+              id="mobile-nav-toggle"
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
+              {menuOpen ? (
+                <X className="h-6 w-6" aria-hidden strokeWidth={1.75} />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden strokeWidth={1.75} />
+              )}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {menuOpen ? (
+        <div
+          id="mobile-nav-menu"
+          className="border-t border-black/10 bg-white/95 px-6 py-4 backdrop-blur-md md:hidden"
+          role="navigation"
+          aria-label="Mobile"
+        >
+          <ul className="m-0 flex list-none flex-col gap-1 p-0 text-base font-normal text-[#555]">
+            {NAV_LINKS.map(({ href, label }) => (
+              <li key={href}>
+                <SectionLink
+                  href={href}
+                  onNavigate={closeMenu}
+                  className="block rounded-lg px-3 py-3 transition hover:bg-black/[0.04] hover:text-[#111]"
+                >
+                  {label}
+                </SectionLink>
+              </li>
+            ))}
+          </ul>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-1 text-sm font-medium text-[#111] transition hover:opacity-70"
+            onClick={closeMenu}
+            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-[#111] bg-[#111] px-4 py-3 text-sm font-medium text-white transition hover:bg-[#222]"
           >
-            Get started
+            Request access
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
-      </nav>
+      ) : null}
     </header>
   )
 }

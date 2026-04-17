@@ -36,12 +36,12 @@ export default function ContactPage() {
           Contact
         </p>
         <h1 className="mt-3 font-sans text-4xl font-bold tracking-tight text-[#111] md:text-5xl">
-          Talk with Runway
+          Request access or a demo
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-[#555]">
-          Whether you want access, a walkthrough for your team, or help planning
-          Supabase, Stripe, and Advisor setup, send a note. We reply within one
-          business day.
+          Tell us about your GA4 properties, how you track leads today, and when you
+          might need Salesforce-ready export. We reply within one business day with
+          next steps for early access.
         </p>
 
         <div className="mt-8 rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_16px_48px_rgba(0,0,0,0.08)] md:p-8">
@@ -134,7 +134,7 @@ export default function ContactPage() {
                   value={form.message}
                   onChange={handleChange}
                   className="mt-1.5 w-full resize-y rounded-xl border border-black/15 bg-white px-4 py-3 text-[#111] outline-none focus:border-[#111]"
-                  placeholder="Tell us about your setup: customers, billing, timesheets, and what you want to connect first (sync, Stripe, Advisor, workflows)."
+                  placeholder="GA4 property IDs, how you track campaigns and leads today, number of clients or brands, and when you might need Salesforce export."
                 />
               </div>
               <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">

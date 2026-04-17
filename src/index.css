@@ -36,6 +36,167 @@ body {
   [data-parallax] {
     transform: none !important;
   }
+
+  .hero-glow-mesh,
+  .hero-glow-orb,
+  .hero-mock-sway,
+  .hero-eyebrow-soft {
+    animation: none !important;
+  }
+}
+
+/* Hero — slow, layered glow (multi-stop loops read more “natural” than one peak) */
+@keyframes hero-glow-mesh {
+  0%,
+  100% {
+    opacity: 0.56;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  28% {
+    opacity: 0.78;
+    transform: scale(1.04) translate3d(-1.4%, 0.9%, 0);
+  }
+  52% {
+    opacity: 0.88;
+    transform: scale(1.07) translate3d(-2.2%, 1.5%, 0);
+  }
+  76% {
+    opacity: 0.68;
+    transform: scale(1.03) translate3d(1.1%, -0.8%, 0);
+  }
+}
+
+@keyframes hero-glow-orb-a {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  32% {
+    opacity: 0.72;
+    transform: translate3d(2.8%, -2.2%, 0) scale(1.08);
+  }
+  64% {
+    opacity: 0.58;
+    transform: translate3d(4.5%, -3.2%, 0) scale(1.12);
+  }
+}
+
+@keyframes hero-glow-orb-b {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: translate3d(0, 0, 0) scale(1.03);
+  }
+  38% {
+    opacity: 0.62;
+    transform: translate3d(-3.2%, 2.4%, 0) scale(1.06);
+  }
+  70% {
+    opacity: 0.52;
+    transform: translate3d(-5%, 4%, 0) scale(1.09);
+  }
+}
+
+/* Barely-there float on the product mock (parent handles scroll parallax) */
+@keyframes hero-mock-sway {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(0, -4px, 0) rotate(0.2deg);
+  }
+  66% {
+    transform: translate3d(0, 3px, 0) rotate(-0.15deg);
+  }
+}
+
+@keyframes hero-eyebrow-soft {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.94;
+    transform: translate3d(0, -1px, 0);
+  }
+}
+
+.hero-glow-mesh {
+  position: absolute;
+  /* Keep bleed modest: huge negative inset + overflow-x-hidden made overflow-y:auto
+     on the hero, which turned the section into its own scroll container. */
+  inset: -18% -12%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 75% 55% at 18% 22%,
+      rgba(212, 245, 66, 0.32),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 65% 50% at 82% 18%,
+      rgba(184, 212, 234, 0.55),
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 55% 88%,
+      rgba(232, 220, 192, 0.4),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 50% 45% at 40% 50%,
+      rgba(255, 255, 255, 0.35),
+      transparent 60%
+    );
+  animation: hero-glow-mesh 34s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.hero-glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.hero-glow-orb--a {
+  left: -5%;
+  top: 10%;
+  height: min(520px, 70vw);
+  width: min(520px, 70vw);
+  background: radial-gradient(
+    circle,
+    rgba(212, 245, 66, 0.45) 0%,
+    rgba(212, 245, 66, 0.08) 45%,
+    transparent 70%
+  );
+  animation: hero-glow-orb-a 27s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.hero-glow-orb--b {
+  right: -8%;
+  bottom: 0;
+  height: min(480px, 65vw);
+  width: min(480px, 65vw);
+  background: radial-gradient(
+    circle,
+    rgba(184, 212, 234, 0.5) 0%,
+    rgba(204, 224, 237, 0.12) 50%,
+    transparent 72%
+  );
+  animation: hero-glow-orb-b 31s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+  animation-delay: -9s;
+}
+
+.hero-mock-sway {
+  animation: hero-mock-sway 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
+}
+
+.hero-eyebrow-soft {
+  animation: hero-eyebrow-soft 16s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 @keyframes marquee {
