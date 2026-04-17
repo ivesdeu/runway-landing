@@ -173,7 +173,7 @@ export default function FeatureTabs() {
   return (
     <section
       ref={ref}
-      className={`relative scroll-mt-24 overflow-x-hidden px-6 py-24 transition-opacity duration-700 md:px-12 lg:px-24 ${
+      className={`relative scroll-mt-24 overflow-x-clip overflow-y-visible px-6 py-24 transition-opacity duration-700 md:px-12 lg:px-24 ${
         inView ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -210,7 +210,7 @@ export default function FeatureTabs() {
             </button>
           ))}
         </div>
-        <div className="relative z-10 mt-16 grid gap-12 lg:mt-20 lg:grid-cols-2 lg:items-center lg:gap-x-16 lg:gap-y-10 xl:gap-x-20">
+        <div className="relative z-10 mt-16 grid gap-12 lg:mt-20 lg:grid-cols-2 lg:items-start lg:gap-x-16 lg:gap-y-10 xl:gap-x-20">
           <div className="min-w-0">
             <p className="text-base leading-relaxed text-[#555] md:text-lg">
               {current.body}

@@ -14,7 +14,6 @@ const NAV_WORDMARK_SRC = `${import.meta.env.BASE_URL}runway-wordmark-nav.png`
 
 const NAV_LINKS = [
   { href: '#features', label: 'Features' },
-  { href: '#reviews', label: 'Reviews' },
   { href: '#faq', label: 'FAQ' },
 ]
 

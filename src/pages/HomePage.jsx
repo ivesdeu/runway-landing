@@ -27,7 +27,10 @@ export default function HomePage() {
       <CustomersSection customers={customerLogos} />
       <FeatureScroll />
       <FeatureTabs />
-      <Testimonials />
+      {/* Testimonials: hidden visually only — delete the wrapper div (keep <Testimonials />) to show again */}
+      <div className="hidden" aria-hidden="true">
+        <Testimonials />
+      </div>
       <FAQ />
       <CTASection />
     </main>

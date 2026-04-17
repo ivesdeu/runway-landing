@@ -32,7 +32,7 @@ const transitionVariants = {
 export function CustomersSection({
   customers = [],
   className,
-  ctaTo = '#reviews',
+  ctaTo = '/contact',
 }) {
   return (
     <section
