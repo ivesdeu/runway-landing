@@ -4,6 +4,7 @@ import { ArrowLeft, Mail, Send } from 'lucide-react'
 
 export default function ContactPage() {
   const [status, setStatus] = useState('idle')
+  const [submitError, setSubmitError] = useState(null)
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -16,9 +17,26 @@ export default function ContactPage() {
     setForm((f) => ({ ...f, [name]: value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    setStatus('sent')
+    setSubmitError(null)
+    setStatus('sending')
+    const formEl = e.currentTarget
+    try {
+      const body = new URLSearchParams(new FormData(formEl)).toString()
+      const res = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      })
+      if (!res.ok) throw new Error('Submit failed')
+      setStatus('sent')
+    } catch {
+      setStatus('idle')
+      setSubmitError(
+        'We could not send that just now. Please try again or email us below.',
+      )
+    }
   }
 
   return (
@@ -61,7 +79,26 @@ export default function ContactPage() {
               </Link>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              className="space-y-5"
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              <p className="hidden" aria-hidden="true">
+                <label>
+                  Do not fill this out:{' '}
+                  <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                </label>
+              </p>
+              {submitError ? (
+                <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900">
+                  {submitError}
+                </p>
+              ) : null}
               <div>
                 <label
                   htmlFor="name"
@@ -140,10 +177,11 @@ export default function ContactPage() {
               <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#111] bg-[#111] px-8 py-3 text-sm font-medium text-white transition hover:bg-[#222]"
+                  disabled={status === 'sending'}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#111] bg-[#111] px-8 py-3 text-sm font-medium text-white transition hover:bg-[#222] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <Send className="h-4 w-4" aria-hidden />
-                  Send message
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
                 </button>
                 <a
                   href="mailto:contact@ivesdeu.com?subject=Runway%20inquiry"

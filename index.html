@@ -17,6 +17,21 @@
     <title>Runway — Marketing dashboard: GA4, leads &amp; Salesforce-ready export</title>
   </head>
   <body>
+    <!-- Netlify parses this at deploy time; keep field names in sync with ContactPage -->
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      style="display: none"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="name" type="text" />
+      <input name="email" type="email" />
+      <input name="company" type="text" />
+      <textarea name="message"></textarea>
+      <input name="bot-field" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
